@@ -63,7 +63,14 @@ public_users.get('/title/:title',function (req, res) {
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const getBooks = new Promise((resolve, reject) => {
+    const book = books[req.params.isbn];
+    if (book) {
+        resolve(res.status(200).json(book.reviews));
+    } else {
+        reject({status:404, message:`ISBN ${isbn} not found`});
+    }
+  });
 });
 
 module.exports.general = public_users;
