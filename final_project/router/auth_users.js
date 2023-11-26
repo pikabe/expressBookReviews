@@ -35,8 +35,8 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   const isbn = req.params.isbn;
   const review = req.body.review;
   const username = req.session.authorization.username;
-  if (books[isbn]) {
-      let book = books[isbn];
+  let book = books[isbn];
+  if (book) {
       book.reviews[username] = review;
       return res.status(200).send("Review successfully posted");
   }
